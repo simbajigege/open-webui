@@ -57,8 +57,7 @@ fi
 
 # 3. Build frontend
 echo "Building frontend..."
-npm config set engine-strict false
-npm ci --quiet
+npm_config_engine_strict=false npm ci --quiet
 npm run build
 
 # 4. Install Python backend dependencies
