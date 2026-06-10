@@ -46,11 +46,13 @@ fi
 
 cd $APP_DIR
 
-# 2. Install Node.js if needed (for frontend build)
-if ! command -v node &>/dev/null; then
+# 2. Install Node.js 22 if needed (open-webui requires >=18 <=22)
+NODE_MAJOR=\$(node -e 'process.exit(parseInt(process.versions.node))' 2>/dev/null; echo \$?)
+if ! command -v node &>/dev/null || node -e 'const v=parseInt(process.versions.node); if(v<18||v>22) process.exit(1)' 2>/dev/null; then
   echo "Installing Node.js 22..."
   curl -fsSL https://rpm.nodesource.com/setup_22.x | bash -
   yum install -y nodejs 2>/dev/null || apt-get install -y nodejs 2>/dev/null || true
+  hash -r
 fi
 
 # 3. Build frontend
