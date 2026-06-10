@@ -57,6 +57,7 @@ fi
 
 # 3. Build frontend
 echo "Building frontend..."
+npm config set engine-strict false
 npm ci --quiet
 npm run build
 
