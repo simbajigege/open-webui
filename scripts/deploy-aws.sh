@@ -35,13 +35,13 @@ echo "Deploying Open WebUI to $SSH_URL..."
 ssh -p $PORT $SSH_URL bash << ENDSSH
 set -e
 
-# 1. Clone or pull latest code
+# 1. Clone or pull latest code (ai2alpha branch)
 if [ -d "$APP_DIR" ]; then
   echo "Pulling latest code..."
-  cd $APP_DIR && git pull --ff-only
+  cd $APP_DIR && git fetch && git checkout ai2alpha && git pull --ff-only origin ai2alpha
 else
   echo "Cloning repo..."
-  cd /app && git clone https://github.com/simbajigege/open-webui
+  cd /app && git clone -b ai2alpha https://github.com/simbajigege/open-webui
 fi
 
 cd $APP_DIR
