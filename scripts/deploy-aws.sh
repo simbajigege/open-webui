@@ -62,7 +62,8 @@ npm run build
 
 # 4. Install Python backend dependencies
 echo "Installing Python dependencies..."
-python3 -m pip install -r backend/requirements.txt --quiet
+PYTHON=/www/server/pyporject_evn/versions/3.11.14/bin/python3
+\$PYTHON -m pip install -r backend/requirements.txt --quiet
 
 # 5. Write .env
 WEBUI_SECRET_KEY=\$(openssl rand -hex 32)
@@ -101,7 +102,7 @@ fi
 cd $APP_DIR
 nohup env \$(cat .env | grep -v '^#' | xargs) \
   PYTHONPATH=./backend \
-  uvicorn open_webui.main:app --host 127.0.0.1 --port 8080 \
+  \$PYTHON -m uvicorn open_webui.main:app --host 127.0.0.1 --port 8080 \
   > $APP_DIR/webui.log 2>&1 &
 echo \$! > $APP_DIR/webui.pid
 echo "Open WebUI started (PID \$(cat $APP_DIR/webui.pid))"
