@@ -62,7 +62,7 @@ npm run build
 
 # 4. Install Python backend dependencies
 echo "Installing Python dependencies..."
-pip3 install -r backend/requirements.txt --quiet
+python3 -m pip install -r backend/requirements.txt --quiet
 
 # 5. Write .env
 WEBUI_SECRET_KEY=\$(openssl rand -hex 32)
